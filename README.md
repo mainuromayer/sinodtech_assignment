@@ -1,61 +1,128 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sales, Inventory & CRM System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A robust, modern business application built using Laravel (PHP) and Blade. This system features Sales & Inventory Management, Customer Relationship Management (CRM), Multi-Branch Support, Email Invoices, and a REST API for third-party e-commerce integration.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Completed Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Sales & Inventory Management
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Product Catalog**: Manage products with Name, SKU, and Price.
+- **Multi-Branch Support**:
+    - Manage multiple store locations.
+    - Maintain branch-specific inventory.
+    - Record sales by branch.
+- **Inventory Control**:
+    - Automatically deduct stock quantity when a product is sold.
+    - Prevent sales when available stock in the selected branch is insufficient (validated via FormRequests).
 
-## Learning Laravel
+### 2. Customer Relationship Management (CRM)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Customer Purchase History**: Track purchase records, purchase frequency, and last purchase date for each customer.
+- **Lost Customer Detection**: Automatically identify inactive ("lost") customers who have not made a purchase within a configurable period (default: 90 days).
+- **Employee Assignment**: Assign inactive/lost customers to employees for follow-up.
+- **KPI Tracking**: Automatically increase the assigned employee's KPI score by 10 points when an assigned inactive customer makes a new purchase.
+- **Customer Re-engagement**: Send promotional emails to inactive customers directly from the CRM dashboard.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 3. Bonus Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Email Invoices**: Automatically generate and send an HTML invoice to the customer after a successful purchase.
+- **E-Commerce Integration API**:
+    - `GET /api/products`: Exposes product information (SKU, Name, Price, and total available stock across all branches).
+    - `GET /api/products/{sku}`: Exposes details for a specific product by SKU.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Technical Stack
 
-### Premium Partners
+- **Backend**: Laravel 11
+- **Database**: MySQL
+- **Frontend**: Blade & Tailwind CSS (via CDN)
+- **Mail**: SMTP (configured for Mailtrap or local log)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Installation & Setup Instructions
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 1. Prerequisites
 
-## Code of Conduct
+Ensure you have the following installed:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP >= 8.2
+- Composer
+- MySQL
+- Laragon (or any local server environment)
 
-## Security Vulnerabilities
+### 2. Clone & Install Dependencies
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Navigate to the project directory and install PHP dependencies:
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Environment Configuration
+
+Copy the `.env.example` file to `.env`:
+
+```bash
+copy .env.example .env
+```
+
+Configure your database credentials in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sinodtech_assignment
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+To test email features, configure your SMTP settings (e.g., Mailtrap) in `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@bizmanager.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+### 4. Database Migrations & Seeders
+
+Run the migrations and seed the database with realistic sample data:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+This will seed:
+
+- **3 Branches**: Dhaka, Chittagong, and Sylhet.
+- **5 Products** with branch-specific stock levels.
+- **3 Employees** with initial KPI scores.
+- **4 Customers** (including active and lost customers).
+- **Historical Sales & Transactions** to populate purchase histories.
+
+### 5. Run the Application
+
+Start the local development server:
+
+```bash
+php artisan serve
+```
+
+Access the application in your browser at `http://127.0.0.1:8000`.
+
+---
+
+## API Endpoints
+
+- **List Products**: `GET http://127.0.0.1:8000/api/products`
+- **Product Details**: `GET http://127.0.0.1:8000/api/products/{sku}`

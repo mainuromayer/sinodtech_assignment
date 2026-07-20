@@ -32,6 +32,89 @@
             <!--begin:Menu item-->
             <div class="menu-item pt-5">
                 <div class="menu-content">
+                    <span class="fw-bold text-muted text-uppercase fs-7">Business Management</span>
+                </div>
+            </div><!--end:Menu item-->
+
+            <!--begin:Branches-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs(['branches.*']) ? 'active' : '' }}"
+                    href="{{ route('branches.index') }}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-store fs-2"></i>
+                    </span>
+                    <span class="menu-title">Branches</span>
+                </a>
+            </div>
+            <!--end:Branches-->
+
+            <!--begin:Products-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs(['products.*']) ? 'active' : '' }}"
+                    href="{{ route('products.index') }}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-boxes-stacked fs-2"></i>
+                    </span>
+                    <span class="menu-title">Products</span>
+                </a>
+            </div>
+            <!--end:Products-->
+
+            <!--begin:Sales-->
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('sales.*') ? 'show' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-receipt fs-2"></i>
+                    </span>
+                    <span class="menu-title">Sales Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion" style="{{ request()->routeIs('sales.*') ? '' : 'display: none; overflow: hidden;' }}">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('sales.index') ? 'active' : '' }}"
+                            href="{{ route('sales.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Sales History</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('sales.create') ? 'active' : '' }}"
+                            href="{{ route('sales.create') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Record Sale</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end:Sales-->
+
+            <!--begin:CRM Customers-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs(['customers.*']) ? 'active' : '' }}"
+                    href="{{ route('customers.index') }}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-users fs-2"></i>
+                    </span>
+                    <span class="menu-title">CRM Customers</span>
+                </a>
+            </div>
+            <!--end:CRM Customers-->
+
+            <!--begin:Employees-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs(['employees.*']) ? 'active' : '' }}"
+                    href="{{ route('employees.index') }}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-user-tie fs-2"></i>
+                    </span>
+                    <span class="menu-title">Employees & KPIs</span>
+                </a>
+            </div>
+            <!--end:Employees-->
+
+            <!--begin:Menu item-->
+            <div class="menu-item pt-5">
+                <div class="menu-content">
                     <span class="fw-bold text-muted text-uppercase fs-7">Site Management</span>
                 </div>
             </div><!--end:Menu item-->

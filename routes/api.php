@@ -29,3 +29,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     });
 
 });
+
+// E-Commerce Integration API (Public REST API)
+Route::get('products', [App\Http\Controllers\Api\ECommerceApiController::class, 'index']);
+Route::get('products/{sku}', [App\Http\Controllers\Api\ECommerceApiController::class, 'show']);
+

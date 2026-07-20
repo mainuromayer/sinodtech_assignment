@@ -10,6 +10,11 @@ use App\Http\Controllers\Web\Backend\RoleController;
 use App\Http\Controllers\Web\Backend\SettingController;
 use App\Http\Controllers\Web\Backend\UserController;
 use App\Http\Controllers\Web\Backend\UserRoleManagementController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
 
 //! dashboard
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
@@ -74,3 +79,15 @@ Route::prefix('/dynamic-pages')->controller(DynamicPageController::class)->group
     Route::post('/{id}','update')->name('dynamic-pages.update');
     Route::delete('/{id}','destroy')->name('dynamic-pages.delete');
 });
+
+//! Business Management Features
+Route::resource('branches', BranchController::class)->only(['index', 'store']);
+Route::resource('products', ProductController::class)->except(['create', 'show', 'edit']);
+Route::resource('sales', SaleController::class)->only(['index', 'create', 'store']);
+
+Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
+Route::post('customers/assign-employee', [CustomerController::class, 'assignEmployee'])->name('customers.assign-employee');
+Route::post('customers/{customer}/reengage', [CustomerController::class, 'reengage'])->name('customers.reengage');
+
+Route::resource('employees', EmployeeController::class)->only(['index', 'store']);
