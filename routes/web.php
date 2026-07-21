@@ -7,7 +7,8 @@ Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('dashboard');
     }
-    return view('welcome');
+    // return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
