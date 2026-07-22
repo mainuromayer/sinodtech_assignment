@@ -76,7 +76,7 @@ class SettingController extends Controller
     public function smtpStore(Request $request)
     {
         $request->validate([
-            'mail_mailer' => 'required|string|in:smtp,sendmail,mailgun,ses,postmark',
+            'mail_mailer' => 'required|string|in:smtp,sendmail,mailgun,ses,ses-v2,postmark,resend,log,array,failover,roundrobin',
             'mail_host' => 'required|string',
             'mail_port' => 'required|integer',
             'mail_username' => 'required|string',
